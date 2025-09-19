@@ -1,109 +1,110 @@
-import { useContract, useContractWrite, useContractRead } from 'wagmi';
+import { useWriteContract, useReadContract } from 'wagmi';
 import { AURA_SHIELD_ADDRESS, AURA_SHIELD_ABI } from '../lib/contract';
 
-export const useAuraShield = () => {
-  const contract = useContract({
-    address: AURA_SHIELD_ADDRESS,
-    abi: AURA_SHIELD_ABI,
-  });
-
-  return {
-    contract,
-  };
-};
-
 export const useCreateProfile = () => {
-  const { write, isLoading, isSuccess, error } = useContractWrite({
-    address: AURA_SHIELD_ADDRESS,
-    abi: AURA_SHIELD_ABI,
-    functionName: 'createProfile',
-  });
+  const { writeContract, isPending, isSuccess, error } = useWriteContract();
 
-  const createProfile = (publicName: string, publicDescription: string) => {
-    write({
-      args: [publicName, publicDescription],
-    });
+  const createProfile = async (publicName: string, publicDescription: string) => {
+    try {
+      await writeContract({
+        address: AURA_SHIELD_ADDRESS,
+        abi: AURA_SHIELD_ABI,
+        functionName: 'createProfile',
+        args: [publicName, publicDescription],
+      });
+    } catch (err) {
+      console.error('Error creating profile:', err);
+    }
   };
 
   return {
     createProfile,
-    isLoading,
+    isLoading: isPending,
     isSuccess,
     error,
   };
 };
 
 export const useUpdateProfile = () => {
-  const { write, isLoading, isSuccess, error } = useContractWrite({
-    address: AURA_SHIELD_ADDRESS,
-    abi: AURA_SHIELD_ABI,
-    functionName: 'updateProfile',
-  });
+  const { writeContract, isPending, isSuccess, error } = useWriteContract();
 
-  const updateProfile = (profileId: number, publicName: string, publicDescription: string) => {
-    write({
-      args: [profileId, publicName, publicDescription],
-    });
+  const updateProfile = async (profileId: number, publicName: string, publicDescription: string) => {
+    try {
+      await writeContract({
+        address: AURA_SHIELD_ADDRESS,
+        abi: AURA_SHIELD_ABI,
+        functionName: 'updateProfile',
+        args: [profileId, publicName, publicDescription],
+      });
+    } catch (err) {
+      console.error('Error updating profile:', err);
+    }
   };
 
   return {
     updateProfile,
-    isLoading,
+    isLoading: isPending,
     isSuccess,
     error,
   };
 };
 
 export const useRequestVerification = () => {
-  const { write, isLoading, isSuccess, error } = useContractWrite({
-    address: AURA_SHIELD_ADDRESS,
-    abi: AURA_SHIELD_ABI,
-    functionName: 'requestVerification',
-  });
+  const { writeContract, isPending, isSuccess, error } = useWriteContract();
 
-  const requestVerification = (profileId: number, verificationType: number, evidenceHash: string) => {
-    write({
-      args: [profileId, verificationType, evidenceHash],
-    });
+  const requestVerification = async (profileId: number, verificationType: number, evidenceHash: string) => {
+    try {
+      await writeContract({
+        address: AURA_SHIELD_ADDRESS,
+        abi: AURA_SHIELD_ABI,
+        functionName: 'requestVerification',
+        args: [profileId, verificationType, evidenceHash],
+      });
+    } catch (err) {
+      console.error('Error requesting verification:', err);
+    }
   };
 
   return {
     requestVerification,
-    isLoading,
+    isLoading: isPending,
     isSuccess,
     error,
   };
 };
 
 export const useAddReputationRecord = () => {
-  const { write, isLoading, isSuccess, error } = useContractWrite({
-    address: AURA_SHIELD_ADDRESS,
-    abi: AURA_SHIELD_ABI,
-    functionName: 'addReputationRecord',
-  });
+  const { writeContract, isPending, isSuccess, error } = useWriteContract();
 
-  const addReputationRecord = (
+  const addReputationRecord = async (
     targetUser: string,
     score: number,
     category: number,
     isPositive: boolean,
     description: string
   ) => {
-    write({
-      args: [targetUser, score, category, isPositive, description],
-    });
+    try {
+      await writeContract({
+        address: AURA_SHIELD_ADDRESS,
+        abi: AURA_SHIELD_ABI,
+        functionName: 'addReputationRecord',
+        args: [targetUser, score, category, isPositive, description],
+      });
+    } catch (err) {
+      console.error('Error adding reputation record:', err);
+    }
   };
 
   return {
     addReputationRecord,
-    isLoading,
+    isLoading: isPending,
     isSuccess,
     error,
   };
 };
 
 export const useGetProfileInfo = (profileId: number) => {
-  const { data, isLoading, error } = useContractRead({
+  const { data, isLoading, error } = useReadContract({
     address: AURA_SHIELD_ADDRESS,
     abi: AURA_SHIELD_ABI,
     functionName: 'getProfileInfo',
@@ -118,7 +119,7 @@ export const useGetProfileInfo = (profileId: number) => {
 };
 
 export const useGetUserReputationScore = (userAddress: string) => {
-  const { data, isLoading, error } = useContractRead({
+  const { data, isLoading, error } = useReadContract({
     address: AURA_SHIELD_ADDRESS,
     abi: AURA_SHIELD_ABI,
     functionName: 'getUserReputationScore',

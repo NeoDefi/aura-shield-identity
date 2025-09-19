@@ -27,12 +27,7 @@ export const IdentityManager = () => {
       return;
     }
 
-    try {
-      const tx = await createProfile(publicName, publicDescription);
-      console.log('Profile creation transaction:', tx);
-    } catch (error) {
-      console.error('Error creating profile:', error);
-    }
+    await createProfile(publicName, publicDescription);
   };
 
   const handleUpdateProfile = async () => {
@@ -41,12 +36,7 @@ export const IdentityManager = () => {
       return;
     }
 
-    try {
-      const tx = await updateProfile(profileId, publicName, publicDescription);
-      console.log('Profile update transaction:', tx);
-    } catch (error) {
-      console.error('Error updating profile:', error);
-    }
+    await updateProfile(profileId, publicName, publicDescription);
   };
 
   const handleRequestVerification = async () => {
@@ -55,12 +45,7 @@ export const IdentityManager = () => {
       return;
     }
 
-    try {
-      const tx = await requestVerification(profileId, verificationType, evidenceHash);
-      console.log('Verification request transaction:', tx);
-    } catch (error) {
-      console.error('Error requesting verification:', error);
-    }
+    await requestVerification(profileId, verificationType, evidenceHash);
   };
 
   if (!isConnected) {
