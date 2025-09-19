@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* Cyberpunk Encrypted Reputation Design System */
+
+@layer base {
+  :root {
+    /* Dark cyberpunk background system */
+    --background: 220 13% 5%;
+    --foreground: 180 100% 90%;
+
+    /* Card system with dark glass effect */
+    --card: 220 15% 8%;
+    --card-foreground: 180 100% 90%;
+    --card-border: 195 100% 25%;
+
+    --popover: 220 15% 8%;
+    --popover-foreground: 180 100% 90%;
+
+    /* Electric blue primary system */
+    --primary: 195 100% 50%;
+    --primary-foreground: 220 13% 5%;
+    --primary-glow: 195 100% 70%;
+
+    /* Neon green accent system */
+    --secondary: 120 100% 50%;
+    --secondary-foreground: 220 13% 5%;
+    --secondary-glow: 120 100% 70%;
+
+    /* Purple encryption theme */
+    --accent: 280 100% 60%;
+    --accent-foreground: 220 13% 5%;
+    --accent-glow: 280 100% 80%;
+
+    /* Muted dark system */
+    --muted: 220 15% 15%;
+    --muted-foreground: 180 20% 60%;
+
+    /* Danger red */
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 220 13% 5%;
+
+    /* Borders and inputs with glow */
+    --border: 195 100% 25%;
+    --input: 220 15% 12%;
+    --ring: 195 100% 50%;
+
+    /* Gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(195 100% 50%), hsl(280 100% 60%));
+    --gradient-mesh: linear-gradient(45deg, hsl(195 100% 50% / 0.1), hsl(280 100% 60% / 0.1), hsl(120 100% 50% / 0.1));
+    --gradient-card: linear-gradient(135deg, hsl(220 15% 8% / 0.8), hsl(220 15% 12% / 0.9));
+    
+    /* Shadows and glows */
+    --shadow-cyber: 0 0 30px hsl(195 100% 50% / 0.3);
+    --shadow-card: 0 10px 25px hsl(220 15% 5% / 0.5);
+    --glow-primary: 0 0 20px hsl(195 100% 50% / 0.5);
+    --glow-secondary: 0 0 20px hsl(120 100% 50% / 0.5);
+    --glow-accent: 0 0 20px hsl(280 100% 60% / 0.5);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+}
+
+/* Custom cyberpunk animations and utilities */
+@layer components {
+  .cyber-glow {
+    box-shadow: var(--glow-primary);
+    transition: all 0.3s ease;
+  }
+  
+  .cyber-glow:hover {
+    box-shadow: 0 0 30px hsl(195 100% 50% / 0.8);
+  }
+  
+  .binary-overlay {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .binary-overlay::before {
+    content: "01001100001110010110100111001101100010111001011010011100110110001011100101101001110011011000101110010110100111001101100010111001";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    line-height: 0.7rem;
+    word-break: break-all;
+    z-index: 1;
+    animation: binaryFlow 10s linear infinite;
+  }
+  
+  .encrypted-card {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--card-border));
+    backdrop-filter: blur(10px);
+    position: relative;
+  }
+  
+  .mesh-pattern {
+    background-image: 
+      linear-gradient(45deg, hsl(195 100% 50% / 0.05) 25%, transparent 25%), 
+      linear-gradient(-45deg, hsl(195 100% 50% / 0.05) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, hsl(280 100% 60% / 0.05) 75%), 
+      linear-gradient(-45deg, transparent 75%, hsl(280 100% 60% / 0.05) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+  
+  .card-flip {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+  
+  .card-flip:hover {
+    transform: rotateY(180deg);
+  }
+  
+  .card-flip .card-front,
+  .card-flip .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .card-flip .card-back {
+    transform: rotateY(180deg);
+  }
+  
+  .text-cyber {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    background: var(--gradient-cyber);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@keyframes binaryFlow {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px hsl(195 100% 50% / 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 40px hsl(195 100% 50% / 0.8);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
