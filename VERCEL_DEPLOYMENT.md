@@ -44,6 +44,8 @@ VITE_INFURA_API_KEY=b18fb7e6ca7045ac83c41157ab93f990
 4. Set **Output Directory**: `dist`
 5. Set **Install Command**: `npm install`
 
+**Note**: The project includes a `vercel.json` configuration file that automatically sets these values. No manual configuration needed.
+
 ### Step 5: Domain Configuration (Optional)
 
 1. Go to Settings > Domains
@@ -89,6 +91,8 @@ Check that all environment variables are properly set in the Vercel dashboard.
 2. **Environment Variables**: Ensure all required variables are set
 3. **Wallet Connection Issues**: Verify WalletConnect Project ID
 4. **Network Issues**: Check RPC URL configuration
+5. **Function Runtime Errors**: Remove invalid functions configuration from vercel.json
+6. **Vite Build Issues**: Ensure all dependencies are properly installed
 
 ### Debug Steps:
 
